@@ -1,0 +1,57 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Hotel Booking{% endblock %}</title>
+
+    <!-- Meta Tags for SEO -->
+    <meta name="description" content="Book your stay at the best hotels around the world. Enjoy exclusive deals and recommendations on Hotel Booking.">
+    <meta name="keywords" content="hotel booking, accommodation, travel, hotels, recommendations">
+    <meta name="author" content="Hotel Booking">
+
+    <!-- Tailwind CSS for styling -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Custom CSS styles -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+</head>
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <!-- Header Section -->
+    <header class="bg-green-700 text-white py-4 shadow-md">
+        <div class="container mx-auto flex justify-between items-center px-6">
+            <h1 class="text-2xl font-bold">
+                <a href="{% url 'accommodations:home' %}" class="hover:text-green-200" aria-label="Hotel Booking Homepage">Hotel Booking</a>
+            </h1>
+            <nav class="space-x-4">
+                <a href="{% url 'accommodations:home' %}" class="hover:text-green-200" aria-label="Home">Home</a>
+                <a href="{% url 'accommodations:advanced_search' %}" class="hover:text-green-200" aria-label="Advanced Search">Search</a>
+                <a href="{% url 'accommodations:recommendations' %}" class="hover:text-green-200" aria-label="Recommendations">Recommendations</a>
+                <a href="{% url 'bookings:list' %}" class="hover:text-green-200" aria-label="My Bookings">My Bookings</a>
+                <a href="{% url 'login' %}" class="hover:text-green-200" aria-label="Login">Login</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="container mx-auto flex-1 px-6 py-8">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-800 text-white py-4 mt-auto">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 Hotel Booking. All Rights Reserved.</p>
+            <p>Follow us:
+                <a href="https://twitter.com" target="_blank" class="hover:text-gray-400 ml-2" aria-label="Follow us on Twitter">Twitter</a> |
+                <a href="https://facebook.com" target="_blank" class="hover:text-gray-400 ml-2" aria-label="Follow us on Facebook">Facebook</a>
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>

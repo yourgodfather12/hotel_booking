@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="max-w-3xl w-full bg-white shadow-lg rounded-lg p-8">
+        <h2 class="text-3xl font-bold text-green-600 mb-4">{{ accommodation.name }}</h2>
+        <img src="{{ accommodation.image_url }}" alt="{{ accommodation.name }}" class="w-full h-auto rounded-lg mb-4 shadow-md">
+
+        <div class="space-y-3 text-gray-700">
+            <p><strong>Description:</strong> {{ accommodation.description }}</p>
+            <p><strong>Location:</strong> <i class="fas fa-map-marker-alt text-red-500"></i> {{ accommodation.location }}</p>
+            <p><strong>Price:</strong> ${{ accommodation.price_per_night }} per night</p>
+            <p><strong>Rating:</strong> {{ accommodation.rating }} ★</p>
+            <p><strong>Available Rooms:</strong> {{ accommodation.available_rooms }}</p>
+        </div>
+
+        <a href="{% url 'booking_confirmation' %}" class="block mt-6 py-3 px-6 bg-green-600 text-white text-center rounded-lg font-semibold hover:bg-green-700 transition duration-200">Book Now</a>
+    </div>
+</div>
+{% endblock %}

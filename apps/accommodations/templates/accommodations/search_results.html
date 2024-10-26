@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Advanced Search - Hotel Booking{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-6 py-8">
+    <div class="bg-gray-800 text-white p-8 rounded-lg shadow-lg max-w-2xl mx-auto">
+        <h1 class="text-3xl font-bold mb-6 text-center">Advanced Search</h1>
+
+        <form action="{% url 'accommodations:advanced_search' %}" method="get" class="space-y-6">
+            <!-- Search Query Input -->
+            <div>
+                <label for="query" class="block text-lg font-medium mb-2">Search</label>
+                <input type="text" id="query" name="query" value="{{ query }}"
+                       class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-200 ease-in-out"
+                       placeholder="Search for accommodations">
+            </div>
+
+            <button type="submit"
+                    class="w-full py-3 px-6 bg-green-600 text-white rounded-lg hover:bg-green-700 transition duration-200 ease-in-out">
+                Search
+            </button>
+        </form>
+
+        {% if accommodations %}
+            <div class="mt-8">
+                <h2 class="text-2xl font-semibold mb-4">Search Results</h2>
+                <ul>
+                    {% for accommodation in accommodations %}
+                        <li class="bg-gray-700 p-4 rounded-lg mb-4">
+                            <h3 class="text-xl font-bold">{{ accommodation.name }}</h3>
+                            <p>{{ accommodation.description|truncatewords:20 }}</p>
+                            <a href="{% url 'accommodations:accommodation_detail' accommodation.pk %}"
+                               class="text-green-400 hover:underline">View Details</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                <!-- Pagination Controls -->
+                <div class="mt-6 flex justify-center">
+                    <span class="inline-flex rounded-md shadow-sm">
+                        {% if accommodations.has_previous %}
+                            <a href="?query={{ query }}&page={{ accommodations.previous_page_number }}"
+                               class="py-2 px-4 bg-gray-600 text-white rounded-l hover:bg-gray-500">Previous</a>
+                        {% endif %}
+
+                        <span class="py-2 px-4 bg-gray-700 text-white">
+                            Page {{ accommodations.number }} of {{ accommodations.paginator.num_pages }}
+                        </span>
+
+                        {% if accommodations.has_next %}
+                            <a href="?query={{ query }}&page={{ accommodations.next_page_number }}"
+                               class="py-2 px-4 bg-gray-600 text-white rounded-r hover:bg-gray-500">Next</a>
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        {% else %}
+            <p class="mt-8 text-gray-400">No results found. Please try a different search.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

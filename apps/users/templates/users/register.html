@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="max-w-md w-full bg-white shadow-lg rounded-lg p-8">
+        <h2 class="text-3xl font-bold text-center text-green-600 mb-6">Create an Account</h2>
+        <form method="post" class="space-y-5">
+            {% csrf_token %}
+            <div class="space-y-2">
+                <label for="username" class="text-gray-700 font-semibold">Username</label>
+                <div class="relative">
+                    <input type="text" name="username" id="username" class="w-full p-3 pl-10 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-600" placeholder="Choose a username">
+                    <i class="fas fa-user absolute left-3 top-3 text-gray-400"></i>
+                </div>
+            </div>
+            <div class="space-y-2">
+                <label for="password1" class="text-gray-700 font-semibold">Password</label>
+                <div class="relative">
+                    <input type="password" name="password1" id="password1" class="w-full p-3 pl-10 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-600" placeholder="Create a password">
+                    <i class="fas fa-lock absolute left-3 top-3 text-gray-400"></i>
+                </div>
+            </div>
+            <div class="space-y-2">
+                <label for="password2" class="text-gray-700 font-semibold">Confirm Password</label>
+                <div class="relative">
+                    <input type="password" name="password2" id="password2" class="w-full p-3 pl-10 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-600" placeholder="Confirm your password">
+                    <i class="fas fa-lock absolute left-3 top-3 text-gray-400"></i>
+                </div>
+            </div>
+            <button type="submit" class="w-full py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition duration-200">Register</button>
+        </form>
+        <p class="text-center text-gray-600 mt-6">Already have an account? <a href="{% url 'login' %}" class="text-green-600 hover:text-green-700">Login here</a>.</p>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Accommodation Details{% endblock %}
+
+{% block content %}
+<div class="bg-white p-6 shadow rounded-lg">
+    <h2 class="text-3xl font-bold text-gray-700 mb-4">{{ accommodation.name }}</h2>
+    <p>{{ accommodation.description }}</p>
+
+    <h3 class="text-2xl font-bold text-gray-600 mt-6">User Reviews</h3>
+    <div class="space-y-4">
+        {% for review in accommodation.reviews.all %}
+            <div class="p-4 bg-gray-100 rounded-lg">
+                <p class="font-semibold">{{ review.user.username }}</p>
+                <p>{{ review.comment }}</p>
+                <p class="text-sm text-gray-500">{{ review.created_at }}</p>
+            </div>
+        {% empty %}
+            <p>No reviews yet. Be the first to review!</p>
+        {% endfor %}
+    </div>
+
+    <a href="{% url 'submit_review' accommodation.id %}" class="inline-block mt-6 py-2 px-4 bg-green-600 text-white rounded-lg">Submit a Review</a>
+</div>
+{% endblock %}

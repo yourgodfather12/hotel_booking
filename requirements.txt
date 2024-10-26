@@ -1,0 +1,6 @@
+Django~=5.1.1
+django-crispy-forms>=1.14
+Pillow>=10.0.0  # Ensure it’s a version supporting Python 3.12
+
+requests~=2.32.3
+django-filter~=24.3
